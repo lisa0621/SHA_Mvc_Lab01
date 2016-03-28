@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MotoGPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Rider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Birth" Type="date" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sex" Type="bit" Nullable="false" />
+          <Property Name="Weight" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="Introduction" Type="nvarchar(max)" />
+          <Property Name="Classes" Type="int" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Class" Type="int" />
+          <Property Name="Bike" Type="nvarchar" MaxLength="200" />
+          <Property Name="cc" Type="int" />
+          <Property Name="Company" Type="int" />
+        </EntityType>
+        <EntityType Name="Team_Rider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Team_Id" Type="int" Nullable="false" />
+          <Property Name="Rider_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Team_Rider_Rider">
+          <End Role="Rider" Type="Self.Rider" Multiplicity="1" />
+          <End Role="Team_Rider" Type="Self.Team_Rider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team_Rider">
+              <PropertyRef Name="Rider_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Rider_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Team_Rider" Type="Self.Team_Rider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team_Rider">
+              <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MotoGPModelStoreContainer">
+          <EntitySet Name="Rider" EntityType="Self.Rider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team_Rider" EntityType="Self.Team_Rider" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Team_Rider_Rider" Association="Self.FK_Team_Rider_Rider">
+            <End Role="Rider" EntitySet="Rider" />
+            <End Role="Team_Rider" EntitySet="Team_Rider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Rider_Team" Association="Self.FK_Team_Rider_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Team_Rider" EntitySet="Team_Rider" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MotoGPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Rider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="Boolean" Nullable="false" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Introduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Classes" Type="Int32" />
+          <NavigationProperty Name="Team_Rider" Relationship="Self.FK_Team_Rider_Rider" FromRole="Rider" ToRole="Team_Rider" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Class" Type="MotoGPModel.EnumGameClass" />
+          <Property Name="Bike" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="cc" Type="Int32" />
+          <Property Name="Company" Type="MotoGPModel.EnumBikeCompany" />
+          <NavigationProperty Name="Team_Rider" Relationship="Self.FK_Team_Rider_Team" FromRole="Team" ToRole="Team_Rider" />
+        </EntityType>
+        <EntityType Name="Team_Rider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Team_Id" Type="Int32" Nullable="false" />
+          <Property Name="Rider_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rider" Relationship="Self.FK_Team_Rider_Rider" FromRole="Team_Rider" ToRole="Rider" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_Team_Rider_Team" FromRole="Team_Rider" ToRole="Team" />
+        </EntityType>
+        <Association Name="FK_Team_Rider_Rider">
+          <End Role="Rider" Type="Self.Rider" Multiplicity="1" />
+          <End Role="Team_Rider" Type="Self.Team_Rider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team_Rider">
+              <PropertyRef Name="Rider_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Rider_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Team_Rider" Type="Self.Team_Rider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team_Rider">
+              <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MotoGPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Rider" EntityType="Self.Rider" />
+          <EntitySet Name="Team" EntityType="Self.Team" />
+          <EntitySet Name="Team_Rider" EntityType="Self.Team_Rider" />
+          <AssociationSet Name="FK_Team_Rider_Rider" Association="Self.FK_Team_Rider_Rider">
+            <End Role="Rider" EntitySet="Rider" />
+            <End Role="Team_Rider" EntitySet="Team_Rider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Rider_Team" Association="Self.FK_Team_Rider_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Team_Rider" EntitySet="Team_Rider" />
+          </AssociationSet>
+        </EntityContainer>
+        <EnumType Name="EnumGameClass" a:ExternalTypeName="MotoGP.Models.Enum.EnumGameClass" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="EnumBikeCompany" a:ExternalTypeName="MotoGP.Models.Enum.EnumBikeCompany" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MotoGPModelStoreContainer" CdmEntityContainer="MotoGPEntities">
+          <EntitySetMapping Name="Rider">
+            <EntityTypeMapping TypeName="MotoGPModel.Rider">
+              <MappingFragment StoreEntitySet="Rider">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Introduction" ColumnName="Introduction" />
+                <ScalarProperty Name="Classes" ColumnName="Classes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team">
+            <EntityTypeMapping TypeName="MotoGPModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Bike" ColumnName="Bike" />
+                <ScalarProperty Name="cc" ColumnName="cc" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team_Rider">
+            <EntityTypeMapping TypeName="MotoGPModel.Team_Rider">
+              <MappingFragment StoreEntitySet="Team_Rider">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Team_Id" ColumnName="Team_Id" />
+                <ScalarProperty Name="Rider_Id" ColumnName="Rider_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -71,7 +71,6 @@ namespace SHA_Mvc_Lab01.Controllers
             {
                 // TODO: Add update logic here
                 riderService.Edit(editVM);
-
                 return RedirectToAction("Index");
             }
             catch

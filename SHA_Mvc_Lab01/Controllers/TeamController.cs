@@ -74,7 +74,6 @@ namespace SHA_Mvc_Lab01.Controllers
             {
                 // TODO: Add update logic here
                 teamService.Edit(editVM);
-
                 return RedirectToAction("Index");
             }
             catch

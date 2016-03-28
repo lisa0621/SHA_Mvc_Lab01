@@ -54,22 +54,29 @@ namespace SHA_Mvc_Lab01.Controllers
         // GET: Rider/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var result = riderService.FindEditById(id);
+            return View(result);
         }
 
         // POST: Rider/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(RiderEditViewModel editVM)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(editVM);
+            }
+
             try
             {
                 // TODO: Add update logic here
+                riderService.Edit(editVM);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View(editVM);
             }
         }
 

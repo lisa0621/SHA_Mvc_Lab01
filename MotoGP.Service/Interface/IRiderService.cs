@@ -11,5 +11,7 @@ namespace MotoGP.Service.Interface
     {
         List<RiderItemViewModel> GetList();
         void Create(RiderCreateViewModel createVM);
+        RiderEditViewModel FindEditById(int id);
+        void Edit(RiderEditViewModel editVM);
     }
 }

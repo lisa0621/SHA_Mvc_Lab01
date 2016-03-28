@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace MotoGP.ViewModels.Rider
 {
-    public class RiderCreateViewModel
+    public class RiderEditViewModel
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         [DataType(DataType.Date)]

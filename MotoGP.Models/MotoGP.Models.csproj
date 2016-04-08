@@ -57,6 +57,7 @@
     <Compile Include="Interface\IRepository.cs" />
     <Compile Include="Interface\IRiderRepo.cs" />
     <Compile Include="Interface\ITeamRepo.cs" />
+    <Compile Include="Interface\ITeam_RiderRepo.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="MotoGP_Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -78,6 +79,7 @@
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\RiderRepo.cs" />
     <Compile Include="Repository\TeamRepo.cs" />
+    <Compile Include="Repository\Team_RiderRepo.cs" />
     <Compile Include="Rider.cs">
       <DependentUpon>MotoGP_Model.tt</DependentUpon>
     </Compile>

@@ -207,6 +207,7 @@
     <Compile Include="Controllers\RiderController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
+    <Compile Include="Controllers\Team_RiderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,6 +289,7 @@
     <Content Include="Views\Rider\Index.cshtml" />
     <Content Include="Views\Rider\Create.cshtml" />
     <Content Include="Views\Rider\Edit.cshtml" />
+    <Content Include="Views\Team_Rider\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MotoGP.Models\MotoGP.Models.csproj">

@@ -57,6 +57,7 @@
     <Compile Include="Team\TeamDetailViewModel.cs" />
     <Compile Include="Team\TeamEditViewModel.cs" />
     <Compile Include="Team\TeamItemViewModel.cs" />
+    <Compile Include="Team_Rider\Team_RiderCreateViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MotoGP.Models\MotoGP.Models.csproj">

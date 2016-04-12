@@ -1,9 +1,5 @@
 ﻿using MotoGP.Service.Interface;
 using MotoGP.ViewModels.Team;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SHA_Mvc_Lab01.Controllers
@@ -42,7 +38,6 @@ namespace SHA_Mvc_Lab01.Controllers
         [HttpPost]
         public ActionResult Create(TeamCreateViewModel createVM)
         {
-          
             if (!ModelState.IsValid)
             {
                 return View(createVM);
@@ -51,7 +46,6 @@ namespace SHA_Mvc_Lab01.Controllers
             teamService.Create(createVM);
 
             return RedirectToAction("Index");
-           
         }
 
         // GET: Team/Edit/5

@@ -1,9 +1,5 @@
 ﻿using MotoGP.Service.Interface;
 using MotoGP.ViewModels.Rider;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SHA_Mvc_Lab01.Controllers

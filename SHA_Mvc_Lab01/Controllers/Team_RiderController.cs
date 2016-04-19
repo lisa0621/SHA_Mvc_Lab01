@@ -1,8 +1,5 @@
 ﻿using MotoGP.Service.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using MotoGP.ViewModels.Team_Rider;
 using System.Web.Mvc;
 
 namespace SHA_Mvc_Lab01.Controllers
@@ -47,18 +44,16 @@ namespace SHA_Mvc_Lab01.Controllers
 
         // POST: Team_Rider/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Team_RiderCreateViewModel createVM)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                return View(createVM);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            teamRiderService.Create(createVM);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Team_Rider/Edit/5

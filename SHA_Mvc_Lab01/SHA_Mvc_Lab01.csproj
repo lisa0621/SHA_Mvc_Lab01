@@ -290,6 +290,7 @@
     <Content Include="Views\Rider\Create.cshtml" />
     <Content Include="Views\Rider\Edit.cshtml" />
     <Content Include="Views\Team_Rider\Create.cshtml" />
+    <Content Include="Views\Team_Rider\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MotoGP.Models\MotoGP.Models.csproj">

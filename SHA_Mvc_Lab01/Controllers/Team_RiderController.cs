@@ -11,19 +11,23 @@ namespace SHA_Mvc_Lab01.Controllers
     {
         private readonly ITeamService teamService;
         private readonly IRiderService riderService;
+        private readonly ITeam_RiderService teamRiderService;
 
         public Team_RiderController(
             ITeamService teamService,
-            IRiderService riderService)
+            IRiderService riderService,
+            ITeam_RiderService teamRiderService)
         {
             this.teamService = teamService;
             this.riderService = riderService;
+            this.teamRiderService = teamRiderService;
         }
 
         // GET: Team_Rider
         public ActionResult Index()
         {
-            return View();
+            var data = teamRiderService.GetList();
+            return View(data);
         }
 
         // GET: Team_Rider/Details/5

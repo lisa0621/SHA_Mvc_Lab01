@@ -43,21 +43,15 @@ namespace MotoGP.Service
 
             return data;
         }
-        private readonly ITeam_RiderRepo teamRiderRepo;
-
-        public Team_RiderService(ITeam_RiderRepo teamRiderRepo)
-        {
-            this.teamRiderRepo = teamRiderRepo;
-        }
 
         public void Create(Team_RiderCreateViewModel createVM)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Team_RiderCreateViewModel, Team_Rider>());
             var mapper = config.CreateMapper();
             var teamRider = mapper.Map<Team_Rider>(createVM);
-
-            teamRiderRepo.Create(teamRider);
-            teamRiderRepo.UnitOfWork.Commit();
+           
+            team_RiderRepo.Create(teamRider);
+            team_RiderRepo.UnitOfWork.Commit();
         }
     }
 }

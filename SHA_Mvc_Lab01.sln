@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHA_Mvc_Lab01", "SHA_Mvc_Lab01\SHA_Mvc_Lab01.csproj", "{F681AA93-DD55-490E-83DE-EA0133EBA812}"
 EndProject
@@ -12,6 +12,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotoGP.ViewModels", "MotoGP.ViewModels\MotoGP.ViewModels.csproj", "{C42BF479-E694-490B-86E1-2E6716E80CDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotoGP.Service", "MotoGP.Service\MotoGP.Service.csproj", "{91FA5FF4-D6AD-4E44-88E5-D3202765773E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{DDED409C-3EFD-4FF6-90ED-B56B7BE38744}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Settings.StyleCop = Settings.StyleCop
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

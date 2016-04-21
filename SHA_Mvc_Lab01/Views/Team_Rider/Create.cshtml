@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null,null, FormMethod.Post, new { id = "LetterForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -17,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Team_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Team_Id, ViewBag.TeamList as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Team_Id, ViewBag.TeamList as SelectList, "-Please Choose-",new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Team_Id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,14 +25,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Rider_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Rider_Id, ViewBag.RiderList as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Rider_Id, ViewBag.RiderList as SelectList, "-Please Choose-", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Rider_Id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default btn-create" />
             </div>
         </div>
     </div>
@@ -44,4 +44,28 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            $(document).ready(function () {
+                
+                validateForm();
+
+                $("#Team_Id").click(function () {
+                    $("#LetterForm").validate().element("#Team_Id");
+                    validateForm();
+                });
+
+                $("#Rider_Id").click(function () {
+                    $("#LetterForm").validate().element("#Rider_Id");
+                    validateForm();
+                });
+                
+                function validateForm() {
+                    if ($('#LetterForm').valid()) {                   // checks form for validity
+                        $('.btn-create').prop('disabled', false);        // enables button
+                    } else {
+                        $('.btn-create').prop('disabled', 'disabled');   // disables button
+                    }
+                }
+            });
+        </script>
 }

@@ -1,5 +1,6 @@
 ﻿using MotoGP.Service.Interface;
 using MotoGP.ViewModels.Team_Rider;
+using System;
 using System.Web.Mvc;
 
 namespace SHA_Mvc_Lab01.Controllers
@@ -21,9 +22,11 @@ namespace SHA_Mvc_Lab01.Controllers
         }
 
         // GET: Team_Rider
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            var data = teamRiderService.GetList();
+            ViewBag.TeamNameSortParm = String.IsNullOrEmpty(sortOrder) ? "teamName_desc" : string.Empty;
+            ViewBag.RiderNameSortParm = sortOrder == "riderName" ? "riderName_desc" : "riderName";
+            var data = teamRiderService.GetList(sortOrder);
             return View(data);
         }
 

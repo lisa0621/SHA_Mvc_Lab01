@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.Year)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TeamName)
+            @Html.ActionLink("Team Name", "Index", new { sortOrder = ViewBag.TeamNameSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RiderName)
+            @Html.ActionLink("Rider Name", "Index", new { sortOrder = ViewBag.RiderNameSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Country)

@@ -28,9 +28,9 @@ namespace MotoGP.Service
             this.team_RiderRepo = team_RiderRepo;
         }
 
-        public List<Team_RiderItemViewModel> GetList()
+        public List<Team_RiderItemViewModel> GetList(string sortOrder)
         {
-            var data = team_RiderRepo.All().Select(x => 
+            var teamRiders = team_RiderRepo.All().Select(x => 
                 new Team_RiderItemViewModel {
                     Year = x.Team.Year,
                     Class = x.Team.Class.Value,
@@ -39,9 +39,26 @@ namespace MotoGP.Service
                     RiderName = x.Rider.Name,
                     Country = x.Rider.Country,
                     Age = DateTime.Now.Year - x.Rider.Birth.Year
-                 }).ToList();
+                 });
 
-            return data;
+            switch (sortOrder)
+            {
+                case "teamName_desc":
+                    teamRiders = teamRiders.OrderByDescending(s => s.TeamName);
+                    break;
+                case "riderName":
+                    teamRiders = teamRiders.OrderBy(s => s.RiderName);
+                    break;
+                case "riderName_desc":
+                    teamRiders = teamRiders.OrderByDescending(s => s.RiderName);
+                    break;
+                default:
+                    teamRiders = teamRiders.OrderBy(s => s.TeamName);
+                    break;
+            }
+
+
+            return teamRiders.ToList();
         }
 
         public void Create(Team_RiderCreateViewModel createVM)

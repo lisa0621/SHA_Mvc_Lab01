@@ -61,6 +61,10 @@
     <Compile Include="Interface\ITeamRepo.cs" />
     <Compile Include="Interface\ITeam_RiderRepo.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="MotogpInterceptorLogging.cs" />
+    <Compile Include="MotogpTransientErrors.cs" />
     <Compile Include="MotoGP_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

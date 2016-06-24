@@ -1,5 +1,7 @@
-﻿using MotoGP.Models.Enum;
+﻿using MotoGP.Models;
+using MotoGP.Models.Enum;
 using MvcEnumFlags;
+using System.Data.Entity.Infrastructure.Interception;
 using System.Security.Claims;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -18,6 +20,8 @@ namespace SHA_Mvc_Lab01
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimsIdentity.DefaultNameClaimType;
             ModelBinders.Binders.Add(typeof(EnumFlagGameClasses), new EnumFlagsModelBinder());
+            DbInterception.Add(new MotogpInterceptorLogging());
+            //DbInterception.Add(new MotogpTransientErrors());
         }
     }
 }

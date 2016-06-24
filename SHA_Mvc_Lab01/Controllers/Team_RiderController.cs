@@ -22,11 +22,11 @@ namespace SHA_Mvc_Lab01.Controllers
         }
 
         // GET: Team_Rider
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.TeamNameSortParm = String.IsNullOrEmpty(sortOrder) ? "teamName_desc" : string.Empty;
             ViewBag.RiderNameSortParm = sortOrder == "riderName" ? "riderName_desc" : "riderName";
-            var data = teamRiderService.GetList(sortOrder);
+            var data = teamRiderService.GetList(sortOrder, searchString);
             return View(data);
         }
 

@@ -28,7 +28,7 @@ namespace MotoGP.Service
             this.team_RiderRepo = team_RiderRepo;
         }
 
-        public List<Team_RiderItemViewModel> GetList(string sortOrder)
+        public List<Team_RiderItemViewModel> GetList(string sortOrder, string searchString)
         {
             var teamRiders = team_RiderRepo.All().Select(x => 
                 new Team_RiderItemViewModel {
@@ -40,6 +40,12 @@ namespace MotoGP.Service
                     Country = x.Rider.Country,
                     Age = DateTime.Now.Year - x.Rider.Birth.Year
                  });
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                teamRiders = teamRiders.Where(s => s.TeamName.Contains(searchString)
+                                       || s.RiderName.Contains(searchString));
+            }
 
             switch (sortOrder)
             {

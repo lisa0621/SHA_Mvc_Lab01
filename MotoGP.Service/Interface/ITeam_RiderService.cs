@@ -11,6 +11,6 @@ namespace MotoGP.Service.Interface
     public interface ITeam_RiderService
     {
         void Create(Team_RiderCreateViewModel createVM);
-        List<Team_RiderItemViewModel> GetList(string sortOrder);
+        List<Team_RiderItemViewModel> GetList(string sortOrder, string searchString);
     }
 }

@@ -1,4 +1,5 @@
-﻿using MotoGP.ViewModels.Rider;
+﻿using MotoGP.ViewModels.Home;
+using MotoGP.ViewModels.Rider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace MotoGP.Service.Interface
         void Create(RiderCreateViewModel createVM);
         RiderEditViewModel FindEditById(int id);
         void Edit(RiderEditViewModel editVM);
+        List<MotogpGroup> GetMotogpGroupList();
     }
 }

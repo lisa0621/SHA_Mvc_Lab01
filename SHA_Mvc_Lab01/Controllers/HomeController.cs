@@ -1,9 +1,18 @@
-﻿using System.Web.Mvc;
+﻿using MotoGP.Service.Interface;
+using System.Web.Mvc;
 
 namespace SHA_Mvc_Lab01.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IRiderService riderService;
+
+        public HomeController(
+            IRiderService riderService)
+        {
+            this.riderService = riderService;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -11,9 +20,9 @@ namespace SHA_Mvc_Lab01.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            var data = riderService.GetMotogpGroupList();
 
-            return View();
+            return View(data);
         }
 
         public ActionResult Contact()

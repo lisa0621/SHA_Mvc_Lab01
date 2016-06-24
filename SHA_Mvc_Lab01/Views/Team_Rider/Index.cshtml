@@ -1,5 +1,6 @@
-﻿@model IEnumerable<MotoGP.ViewModels.Team_Rider.Team_RiderItemViewModel>
-
+﻿@model PagedList.IPagedList<MotoGP.ViewModels.Team_Rider.Team_RiderItemViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
@@ -10,10 +11,10 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Team_Rider", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("SearchString")
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
@@ -21,19 +22,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Year)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Year)
         </th>
         <th>
-            @Html.ActionLink("Team Name", "Index", new { sortOrder = ViewBag.TeamNameSortParm })
+            @Html.ActionLink("Team Name", "Index", new { sortOrder = ViewBag.TeamNameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Rider Name", "Index", new { sortOrder = ViewBag.RiderNameSortParm })
+            @Html.ActionLink("Rider Name", "Index", new { sortOrder = ViewBag.RiderNameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Country)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Age)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Age)
         </th>
         <th></th>
     </tr>
@@ -64,3 +65,9 @@
 }
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

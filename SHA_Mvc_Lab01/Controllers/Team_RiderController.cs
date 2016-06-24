@@ -1,5 +1,6 @@
 ﻿using MotoGP.Service.Interface;
 using MotoGP.ViewModels.Team_Rider;
+using PagedList;
 using System;
 using System.Web.Mvc;
 
@@ -22,12 +23,28 @@ namespace SHA_Mvc_Lab01.Controllers
         }
 
         // GET: Team_Rider
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.TeamNameSortParm = String.IsNullOrEmpty(sortOrder) ? "teamName_desc" : string.Empty;
             ViewBag.RiderNameSortParm = sortOrder == "riderName" ? "riderName_desc" : "riderName";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var data = teamRiderService.GetList(sortOrder, searchString);
-            return View(data);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(data.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Team_Rider/Details/5

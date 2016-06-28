@@ -2,7 +2,10 @@
 using MotoGP.ViewModels.Team_Rider;
 using PagedList;
 using System;
+using System.IO;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SHA_Mvc_Lab01.Controllers
 {
@@ -118,6 +121,26 @@ namespace SHA_Mvc_Lab01.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult ExportData()
+        {
+            GridView gv = new GridView();
+            gv.DataSource = teamRiderService.GetList(null, null);
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=TeamRider.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = string.Empty;
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            gv.RenderControl(htw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return RedirectToAction("Index");
         }
     }
 }

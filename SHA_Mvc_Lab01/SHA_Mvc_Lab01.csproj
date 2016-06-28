@@ -232,7 +232,10 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cn.svg" />
+    <Content Include="Content\gb.svg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\tw.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -302,11 +305,16 @@
     <Content Include="Views\Rider\Edit.cshtml" />
     <Content Include="Views\Team_Rider\Create.cshtml" />
     <Content Include="Views\Team_Rider\Index.cshtml" />
+    <Content Include="Views\Shared\_CultureChooserUserControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MotoGP.Models\MotoGP.Models.csproj">
       <Project>{1e421f60-e1f8-40cb-8f88-1a9e23ad5ec9}</Project>
       <Name>MotoGP.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MotoGP.Resources\MotoGP.Resources.csproj">
+      <Project>{3490fa21-6b4e-455c-84e1-bb089eadc077}</Project>
+      <Name>MotoGP.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\MotoGP.Service\MotoGP.Service.csproj">
       <Project>{91fa5ff4-d6ad-4e44-88e5-d3202765773e}</Project>

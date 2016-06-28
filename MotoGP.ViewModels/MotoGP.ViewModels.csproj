@@ -68,6 +68,10 @@
       <Project>{1e421f60-e1f8-40cb-8f88-1a9e23ad5ec9}</Project>
       <Name>MotoGP.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MotoGP.Resources\MotoGP.Resources.csproj">
+      <Project>{3490fa21-6b4e-455c-84e1-bb089eadc077}</Project>
+      <Name>MotoGP.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,4 +1,5 @@
 ﻿using MotoGP.Service.Interface;
+using System.Globalization;
 using System.Web.Mvc;
 
 namespace SHA_Mvc_Lab01.Controllers
@@ -27,9 +28,16 @@ namespace SHA_Mvc_Lab01.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            //ViewBag.Message = "Your contact page.";
+            ViewBag.Message = MotoGP.Resources.Views.Shared.Shared.Title;
 
             return View();
         }
-    }
+
+        public ActionResult ChangeCulture(string lang, string returnUrl)
+        {
+              Session["Culture"] = new CultureInfo(lang);
+              return RedirectToAction("Index", "Home");
+        }
+}
 }

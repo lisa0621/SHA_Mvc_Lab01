@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MotoGP.Resources.Views.Shared;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("MotoGP DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(Shared.Title, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -28,6 +29,7 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
+                @Html.Partial("_CultureChooserUserControl")
             </div>
         </div>
     </div>

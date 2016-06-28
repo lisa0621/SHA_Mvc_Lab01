@@ -1,4 +1,6 @@
 ﻿using MotoGP.Models.Enum;
+using MotoGP.Resources;
+using MotoGP.Resources.ViewModels.Rider;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +12,9 @@ namespace MotoGP.ViewModels.Rider
 {
     public class RiderCreateViewModel
     {
+        [Required(ErrorMessageResourceName = "Required",
+            ErrorMessageResourceType = typeof(RiderValidationStrings))]
+        [LocalizedDisplayName("Name", NameResourceType = typeof(Names))]
         public string Name { get; set; }
 
         [DataType(DataType.Date)]
@@ -22,6 +27,7 @@ namespace MotoGP.ViewModels.Rider
 
         public bool Sex { get; set; }
 
+        [LocalizedDisplayName("Weight", NameResourceType = typeof(Names))]
         public double Weight { get; set; }
 
         public double Height { get; set; }

@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{DDED409C-3EF
 		Settings.StyleCop = Settings.StyleCop
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotoGP.Resources", "MotoGP.Resources\MotoGP.Resources.csproj", "{3490FA21-6B4E-455C-84E1-BB089EADC077}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{91FA5FF4-D6AD-4E44-88E5-D3202765773E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91FA5FF4-D6AD-4E44-88E5-D3202765773E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91FA5FF4-D6AD-4E44-88E5-D3202765773E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3490FA21-6B4E-455C-84E1-BB089EADC077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3490FA21-6B4E-455C-84E1-BB089EADC077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3490FA21-6B4E-455C-84E1-BB089EADC077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3490FA21-6B4E-455C-84E1-BB089EADC077}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

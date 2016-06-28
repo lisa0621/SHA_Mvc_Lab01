@@ -1,9 +1,14 @@
 ﻿using MotoGP.Service.Interface;
 using MotoGP.ViewModels.Team_Rider;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PagedList;
+using SHA_Mvc_Lab01.Infrastructure;
 using System;
+using System.Data;
 using System.IO;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -141,6 +146,26 @@ namespace SHA_Mvc_Lab01.Controllers
             Response.End();
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Export()
+        {
+            var query = teamRiderService.GetList(null, null);
+
+            string output = new JavaScriptSerializer().Serialize(query);
+            var dt = JsonConvert.DeserializeObject<DataTable>(output.ToString());
+
+            var exportFileName = string.Concat(
+                "TeamRider_",
+                DateTime.Now.ToString("yyyyMMddHHmmss"),
+                ".xlsx");
+
+            return new ExportExcelResult
+            {
+                SheetName = "TeamRider",
+                FileName = exportFileName,
+                ExportData = dt
+            };
         }
     }
 }

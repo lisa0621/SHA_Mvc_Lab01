@@ -6,6 +6,12 @@
 
 <h2>Index</h2>
 
+<div class="well">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#UploadModal">
+        Import Excel
+    </button>
+</div>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -48,3 +54,22 @@
     </tr>
 }
 </table>
+
+@Html.Partial("_UploadFile")
+
+@section scripts
+{
+    <script src="~/Scripts/bootbox.js"></script>
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/project.js"></script>
+    <script src="~/Scripts/project.extends.js"></script>
+    <script src="~/Scripts/project.Team.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var actionUrls = {
+                Upload: '@Url.Action("Upload", "ZipCode")'
+            };
+            project.Team.Initialize(actionUrls);
+        });
+    </script>
+}

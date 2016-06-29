@@ -64,7 +64,7 @@ namespace SHA_Mvc_Lab01.Controllers
         // GET: Team_Rider/Create
         public ActionResult Create()
         {
-            ViewBag.TeamList = new SelectList(teamService.GetList(), "Id", "Name");
+            ViewBag.TeamList = new SelectList(teamService.GetList(), "Id", "YearName");
             ViewBag.RiderList = new SelectList(riderService.GetList(), "Id", "Name");
 
             return View();

@@ -22,5 +22,13 @@ namespace MotoGP.ViewModels.Team
         public int cc { get; set; }
 
         public EnumBikeCompany Company { get; set; }
+
+        public string YearName
+        {
+            get
+            {
+                return Year + " - " + Name;
+            }
+        }
     }
 }

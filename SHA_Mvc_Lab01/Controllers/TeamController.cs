@@ -1,8 +1,11 @@
-﻿using MotoGP.Service.Interface;
+﻿using MotoGP.Models;
+using MotoGP.Service.Interface;
 using MotoGP.ViewModels.Team;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SHA_Mvc_Lab01.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Configuration;
@@ -202,6 +205,38 @@ namespace SHA_Mvc_Lab01.Controllers
                 throw;
             }
             return result;
+        }
+
+        [HttpPost]
+        public ActionResult Import(string savedFileName)
+        {
+            var jo = new JObject();
+            string result;
+
+            try
+            {
+                var fileName = string.Concat(Server.MapPath(fileSavedPath), "/", savedFileName);
+
+                var importTeams = new List<Team>();
+
+                var helper = new ImportDataHelper();
+                var checkResult = helper.CheckImportData(fileName, importTeams);
+
+                jo.Add("Result", checkResult.Success);
+                jo.Add("Msg", checkResult.Success ? string.Empty : checkResult.ErrorMessage);
+
+                if (checkResult.Success)
+                {
+                    //儲存匯入的資料
+                    helper.SaveImportData(importTeams);
+                }
+                result = JsonConvert.SerializeObject(jo);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return Content(result, "application/json");
         }
     }
 }

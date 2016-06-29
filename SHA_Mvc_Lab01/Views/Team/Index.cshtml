@@ -67,7 +67,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var actionUrls = {
-                Upload: '@Url.Action("Upload", "ZipCode")'
+                Upload: '@Url.Action("Upload", "Team")',
+                Import: '@Url.Action("Import", "Team")',
             };
             project.Team.Initialize(actionUrls);
         });

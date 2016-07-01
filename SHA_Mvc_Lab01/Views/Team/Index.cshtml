@@ -10,6 +10,9 @@
     <button class="btn btn-primary" data-toggle="modal" data-target="#UploadModal">
         Import Excel
     </button>
+    <button class="btn btn-primary" id="ButtonExport" name="ButtonExport">
+        Export Excel
+    </button>
 </div>
 
 <p>
@@ -69,6 +72,8 @@
             var actionUrls = {
                 Upload: '@Url.Action("Upload", "Team")',
                 Import: '@Url.Action("Import", "Team")',
+                HasData: '@Url.Action("HasData", "Team")',
+                ExportData: '@Url.Action("Export", "Team")'
             };
             project.Team.Initialize(actionUrls);
         });

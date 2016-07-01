@@ -82,6 +82,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RiderValidationStrings.zh-TW.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Team\TeamResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TeamResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Team\TeamResources.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TeamResources.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Team\TeamResources.zh-CN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TeamResources.zh-CN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Team\TeamResources.zh-TW.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TeamResources.zh-TW.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home\Home.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -141,6 +161,22 @@
     <EmbeddedResource Include="ViewModels\Rider\RiderValidationStrings.zh-TW.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RiderValidationStrings.zh-TW.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Team\TeamResources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TeamResources.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Team\TeamResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TeamResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Team\TeamResources.zh-CN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TeamResources.zh-CN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Team\TeamResources.zh-TW.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TeamResources.zh-TW.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\Home.en.resx" />
     <EmbeddedResource Include="Views\Home\Home.resx">

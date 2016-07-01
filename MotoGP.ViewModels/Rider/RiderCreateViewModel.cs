@@ -3,6 +3,7 @@ using MotoGP.Resources;
 using MotoGP.Resources.ViewModels.Rider;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace MotoGP.ViewModels.Rider
 
         public bool Sex { get; set; }
 
-        [LocalizedDisplayName("Weight", NameResourceType = typeof(Names))]
+        [Display(Name = "Weight", ResourceType = typeof(Names))]
         public double Weight { get; set; }
 
         public double Height { get; set; }

@@ -6,10 +6,14 @@ using Newtonsoft.Json.Linq;
 using SHA_Mvc_Lab01.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SHA_Mvc_Lab01.Controllers
 {
@@ -237,6 +241,55 @@ namespace SHA_Mvc_Lab01.Controllers
                 throw;
             }
             return Content(result, "application/json");
+        }
+
+        [HttpPost]
+        public ActionResult HasData()
+        {
+            JObject jo = new JObject();
+            bool result = !teamService.GetList().Count.Equals(0);
+            jo.Add("Msg", result.ToString());
+            return Content(JsonConvert.SerializeObject(jo), "application/json");
+        }
+
+        public ActionResult ExportData()
+        {
+            GridView gv = new GridView();
+            gv.DataSource = teamService.GetList();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=TeamRider.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = string.Empty;
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            gv.RenderControl(htw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Export()
+        {
+            var query = teamService.GetList();
+
+            string output = new JavaScriptSerializer().Serialize(query);
+            var dt = JsonConvert.DeserializeObject<DataTable>(output.ToString());
+
+            var exportFileName = string.Concat(
+                "Team_",
+                DateTime.Now.ToString("yyyyMMddHHmmss"),
+                ".xlsx");
+
+            return new ExportExcelResult
+            {
+                SheetName = "Team",
+                FileName = exportFileName,
+                ExportData = dt
+            };
         }
     }
 }

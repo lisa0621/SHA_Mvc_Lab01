@@ -167,5 +167,33 @@ namespace SHA_Mvc_Lab01.Controllers
                 ExportData = dt
             };
         }
+
+        [HttpPost]
+        public ActionResult HasData()
+        {
+            JObject jo = new JObject();
+            bool result = !teamRiderService.GetList(null, null).Count.Equals(0);
+            jo.Add("Msg", result.ToString());
+            return Content(JsonConvert.SerializeObject(jo), "application/json");
+        }
+
+        public ActionResult ExportCustomFilename(string fileName)
+        {
+            var query = teamRiderService.GetList(null, null);
+
+            string output = new JavaScriptSerializer().Serialize(query);
+            var dt = JsonConvert.DeserializeObject<DataTable>(output.ToString());
+
+            var exportFileName = string.IsNullOrWhiteSpace(fileName)
+                ? string.Concat("TeamRider_", DateTime.Now.ToString("yyyyMMddHHmmss"), ".xlsx")
+                : string.Concat(fileName, ".xlsx");
+
+            return new ExportExcelResult
+            {
+                SheetName = "TeamRider",
+                FileName = exportFileName,
+                ExportData = dt
+            };
+        }
     }
 }

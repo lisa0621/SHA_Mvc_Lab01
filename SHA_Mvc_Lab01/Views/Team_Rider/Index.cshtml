@@ -17,6 +17,12 @@
     <input type="submit" name="Export" id="Export" value="Export Excel" />
 }
 
+<div class="well">
+    <button class="btn btn-primary" id="ButtonExport" name="ButtonExport">
+        匯出資料自訂檔名
+    </button>
+</div>
+
 @using (Html.BeginForm("Index", "Team_Rider", FormMethod.Get))
 {
     <p>
@@ -77,3 +83,11 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<!-- ExportData Dialog -->
+@Html.Partial("_ExportDataDialog")
+<!-- ExportData Dialog -->
+@section scripts
+{
+    <script src="~/Scripts/Customer-Export.js"></script>
+}

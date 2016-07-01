@@ -274,6 +274,16 @@
   <ItemGroup>
     <Content Include="App_Data\Elmah.Errors\ElmahErrors.txt" />
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\bootstrap-modal-master\.gitattributes" />
+    <Content Include="Content\bootstrap-modal-master\.gitignore" />
+    <Content Include="Content\bootstrap-modal-master\bs3.html" />
+    <Content Include="Content\bootstrap-modal-master\css\bootstrap-modal-bs3patch.css" />
+    <Content Include="Content\bootstrap-modal-master\css\bootstrap-modal.css" />
+    <Content Include="Content\bootstrap-modal-master\img\ajax-loader.gif" />
+    <Content Include="Content\bootstrap-modal-master\index.html" />
+    <Content Include="Content\bootstrap-modal-master\js\bootstrap-modal.js" />
+    <Content Include="Content\bootstrap-modal-master\js\bootstrap-modalmanager.js" />
+    <Content Include="Content\bootstrap-modal-master\modal_ajax_test.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -298,6 +308,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\jasny-bootstrap.css.map" />
+    <Content Include="Content\bootstrap-modal-master\bower.json" />
+    <Content Include="Content\bootstrap-modal-master\composer.json" />
+    <Content Include="Content\bootstrap-modal-master\LICENSE" />
+    <Content Include="Content\bootstrap-modal-master\params.json" />
+    <Content Include="Content\bootstrap-modal-master\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\TeamRider-Export.js" />
     <Content Include="Scripts\jasny-bootstrap.js" />
@@ -399,7 +414,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\bootstrap-modal-master\" />
     <Folder Include="FileUpload\" />
   </ItemGroup>
   <PropertyGroup>

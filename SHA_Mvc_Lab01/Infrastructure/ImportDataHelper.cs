@@ -64,7 +64,7 @@ namespace SHA_Mvc_Lab01.Infrastructure
                 //team.Name = row.Name;
                 team.Class = row.Class;
                 team.Bike = row.Bike;
-                team.cc = row.cc;
+                //team.cc = row.cc;
                 team.Company = row.Company;
 
                 //Name
@@ -73,6 +73,13 @@ namespace SHA_Mvc_Lab01.Infrastructure
                     errorMessage.Append("Name - 不可空白. ");
                 }
                 team.Name = row.Name;
+
+                //cc
+                if (row.cc != null && row.cc <= 0)
+                {
+                    errorMessage.Append("cc - 不可空白. ");
+                }
+                team.cc = row.cc;
 
                 //=============================================================================
                 if (errorMessage.Length > 0)

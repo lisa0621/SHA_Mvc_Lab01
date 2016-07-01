@@ -1,10 +1,12 @@
-﻿using MotoGP.Service.Interface;
+﻿using AutoMapper;
+using MotoGP.Service.Interface;
 using MotoGP.ViewModels.Team_Rider;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PagedList;
 using SHA_Mvc_Lab01.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -221,8 +223,11 @@ namespace SHA_Mvc_Lab01.Controllers
         {
             var query = teamRiderService.GetList(null, null);
 
-            string output = new JavaScriptSerializer().Serialize(query);
-            var dt = JsonConvert.DeserializeObject<DataTable>(output.ToString());
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Team_RiderItemViewModel, Team_RiderExportViewModel>());
+            var mapper = config.CreateMapper();
+            var result = mapper.Map<List<Team_RiderExportViewModel>>(query);
+
+            var dt = ExportDataHelper.GetExportDataTable(result, selectedColumns);
 
             var exportFileName = string.IsNullOrWhiteSpace(fileName)
                 ? string.Concat("TeamRider_", DateTime.Now.ToString("yyyyMMddHHmmss"), ".xlsx")
@@ -239,8 +244,7 @@ namespace SHA_Mvc_Lab01.Controllers
             {
                 SheetName = "TeamRider",
                 FileName = exportFileName,
-                ExportData = dt,
-                RemoveColumnNames = removeColumnNames
+                ExportData = dt
             };
         }
     }

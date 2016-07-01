@@ -7,6 +7,7 @@ using SHA_Mvc_Lab01.Infrastructure;
 using System;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.UI;
@@ -33,6 +34,16 @@ namespace SHA_Mvc_Lab01.Controllers
         // GET: Team_Rider
         public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
+            //匯出資料欄位
+            ViewBag.ExportColumns =
+                ExportDataHelper.Team_RiderExportColumns()
+                                .Select(column => new SelectListItem()
+                                {
+                                    Value = column.Key,
+                                    Text = column.Value,
+                                    Selected = true
+                                }).ToList();
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.TeamNameSortParm = String.IsNullOrEmpty(sortOrder) ? "teamName_desc" : string.Empty;
             ViewBag.RiderNameSortParm = sortOrder == "riderName" ? "riderName_desc" : "riderName";
@@ -193,6 +204,30 @@ namespace SHA_Mvc_Lab01.Controllers
                 SheetName = "TeamRider",
                 FileName = exportFileName,
                 ExportData = dt
+            };
+        }
+
+        public ActionResult ExportSelectedColumns(string fileName, string selectedColumns)
+        {
+            var query = teamRiderService.GetList(null, null);
+
+            string output = new JavaScriptSerializer().Serialize(query);
+            var dt = JsonConvert.DeserializeObject<DataTable>(output.ToString());
+
+            var exportFileName = string.IsNullOrWhiteSpace(fileName)
+                ? string.Concat("TeamRider_", DateTime.Now.ToString("yyyyMMddHHmmss"), ".xlsx")
+                : string.Concat(fileName, ".xlsx");
+
+            var removeColumnNames = ExportDataHelper.GetRemoveColumnNames(
+                ExportDataHelper.Team_RiderExportColumns(),
+                selectedColumns);
+
+            return new ExportExcelResult
+            {
+                SheetName = "TeamRider",
+                FileName = exportFileName,
+                ExportData = dt,
+                RemoveColumnNames = removeColumnNames
             };
         }
     }

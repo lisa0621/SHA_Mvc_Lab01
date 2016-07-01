@@ -15,6 +15,7 @@ namespace SHA_Mvc_Lab01.Infrastructure
         public string SheetName { get; set; }
         public string FileName { get; set; }
         public DataTable ExportData { get; set; }
+        public List<string> RemoveColumnNames { get; set; }
 
         public ExportExcelResult()
         {
@@ -36,6 +37,13 @@ namespace SHA_Mvc_Lab01.Infrastructure
                     "ExportData_",
                     DateTime.Now.ToString("yyyyMMddHHmmss"),
                     ".xlsx");
+            }
+            if (RemoveColumnNames != null && RemoveColumnNames.Count > 0)
+            {
+                foreach (var item in this.RemoveColumnNames)
+                {
+                    this.ExportData.Columns.Remove(item);
+                }
             }
 
             this.ExportExcelEventHandler(context);

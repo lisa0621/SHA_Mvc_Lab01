@@ -258,6 +258,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\CheckResult.cs" />
+    <Compile Include="Infrastructure\ExportDataHelper.cs" />
     <Compile Include="Infrastructure\ExportExcelResult.cs" />
     <Compile Include="Infrastructure\ImportDataHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

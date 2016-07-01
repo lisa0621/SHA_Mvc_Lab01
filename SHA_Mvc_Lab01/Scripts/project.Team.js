@@ -61,15 +61,17 @@
 
             $.ajax({
                 type: 'post',
-                url: project.ActionUrls.Import,
+                url: Router.action('Team', 'ImportExam'),
                 data: { savedFileName: savedFileName },
                 async: false,
                 cache: false,
                 dataType: 'json',
                 success: function (data) {
                     if (data.Msg) {
-                        project.AlertErrorMessage("錯誤", data.Msg);
-                        $('#UploadModal').modal('hide');
+                        project.ShowMessageCallback("錯誤", data.Msg, function () {
+                            $('#UploadModal').modal('hide');
+                            window.location.href = Router.action('Team', 'Index');
+                        });
                     }
                     else {
                         project.ShowMessageCallback("訊息", "匯入完成", function () {

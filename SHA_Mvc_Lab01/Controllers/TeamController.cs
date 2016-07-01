@@ -1,4 +1,5 @@
-﻿using MotoGP.Models;
+﻿using AutoMapper;
+using MotoGP.Models;
 using MotoGP.Service.Interface;
 using MotoGP.ViewModels.Team;
 using Newtonsoft.Json;
@@ -28,10 +29,21 @@ namespace SHA_Mvc_Lab01.Controllers
         }
 
         // GET: Team
+        //public ActionResult Index()
+        //{
+        //    var data = teamService.GetList();
+        //    return View(data);
+        //}
+
         public ActionResult Index()
         {
-            var data = teamService.GetList();
-            return View(data);
+            var result = TempData["errorTeams"];
+            if (result == null)
+            {
+                result = teamService.GetList();
+            }
+
+            return View(result);
         }
 
         // GET: Team/Details/5
@@ -240,6 +252,50 @@ namespace SHA_Mvc_Lab01.Controllers
             {
                 throw;
             }
+            return Content(result, "application/json");
+        }
+
+        [HttpPost]
+        public ActionResult ImportExam(string savedFileName)
+        {
+            var jo = new JObject();
+            string result;
+
+            try
+            {
+                var errorTeams = new List<TeamItemViewModel>();
+
+                var fileName = string.Concat(Server.MapPath(fileSavedPath), "/", savedFileName);
+
+                var importTeams = new List<Team>();
+
+                var helper = new ImportDataHelper();
+                var checkResult = helper.CheckImportData(fileName, importTeams);
+
+                jo.Add("Result", checkResult.Success);
+                jo.Add("Msg", checkResult.Success ? string.Empty : checkResult.ErrorMessage);
+
+                if (checkResult.Success)
+                {
+                    //儲存匯入的資料
+                    helper.SaveImportData(importTeams);
+                }
+                else
+                {
+                    var config = new MapperConfiguration(cfg => cfg.CreateMap<Team, TeamItemViewModel>());
+                    var mapper = config.CreateMapper();
+                    errorTeams = mapper.Map<List<TeamItemViewModel>>(importTeams);
+
+                    TempData["errorTeams"] = errorTeams;
+                }
+
+                result = JsonConvert.SerializeObject(jo);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
             return Content(result, "application/json");
         }
 

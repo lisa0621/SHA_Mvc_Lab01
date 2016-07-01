@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rider\RiderCreateViewModel.cs" />
     <Compile Include="Rider\RiderEditViewModel.cs" />
+    <Compile Include="Rider\RiderExportViewModel.cs" />
     <Compile Include="Rider\RiderItemViewModel.cs" />
     <Compile Include="Team\TeamCreateViewModel.cs" />
     <Compile Include="Team\TeamDetailViewModel.cs" />

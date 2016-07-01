@@ -219,9 +219,9 @@ namespace SHA_Mvc_Lab01.Controllers
             };
         }
 
-        public ActionResult ExportSelectedColumns(string fileName, string selectedColumns)
+        public ActionResult ExportSelectedColumns(string fileName, string selectedColumns, string sortOrder, string searchString)
         {
-            var query = teamRiderService.GetList(null, null);
+            var query = teamRiderService.GetList(sortOrder, searchString);
 
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Team_RiderItemViewModel, Team_RiderExportViewModel>());
             var mapper = config.CreateMapper();

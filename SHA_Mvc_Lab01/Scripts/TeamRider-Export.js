@@ -39,7 +39,13 @@
                 return false;
             }
 
-            ExportSelectedData(exportFileName, selectedColumns);
+            //匯出 sortOrder
+            var sortOrder = getParameterByName('sortOrder');
+
+            //匯出 searchString
+            var searchString = $.trim($('#SearchString').val());
+
+            ExportSelectedData(exportFileName, selectedColumns, sortOrder, searchString);
         });
 
     });
@@ -96,7 +102,7 @@
         });
     }
 
-    function ExportSelectedData(exportFileName, selectedColumns) {
+    function ExportSelectedData(exportFileName, selectedColumns, sortOrder, searchString) {
         /// <summary>
         /// 資料匯出選擇的欄位
         /// </summary>
@@ -115,8 +121,8 @@
                     }
                     else {
                         window.location = exportFileName.length == 0
-                            ? Router.action('Team_Rider', 'ExportSelectedColumns', { selectedColumns: selectedColumns })
-                            : Router.action('Team_Rider', 'ExportSelectedColumns', { fileName: exportFileName, selectedColumns: selectedColumns });
+                            ? Router.action('Team_Rider', 'ExportSelectedColumns', { selectedColumns: selectedColumns, sortOrder: sortOrder, searchString: searchString })
+                            : Router.action('Team_Rider', 'ExportSelectedColumns', { fileName: exportFileName, selectedColumns: selectedColumns, sortOrder: sortOrder, searchString: searchString });
 
                         $('#ExportFileName').val('');
                         $('#ExportDataDialog').modal('hide');
@@ -127,6 +133,16 @@
                 AlertErrorMessage("錯誤", "資料匯出錯誤");
             }
         });
+    }
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 })
 (window);

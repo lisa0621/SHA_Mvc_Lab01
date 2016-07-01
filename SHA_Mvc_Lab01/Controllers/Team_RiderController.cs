@@ -35,14 +35,24 @@ namespace SHA_Mvc_Lab01.Controllers
         public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             //匯出資料欄位
-            ViewBag.ExportColumns =
-                ExportDataHelper.Team_RiderExportColumns()
-                                .Select(column => new SelectListItem()
+            //ViewBag.ExportColumns =
+            //    ExportDataHelper.Team_RiderExportColumns()
+            //                    .Select(column => new SelectListItem()
+            //                    {
+            //                        Value = column.Key,
+            //                        Text = column.Value,
+            //                        Selected = true
+            //                    }).ToList();
+
+            //匯出資料欄位
+            var exportColumns = ExportColumnAttributeHelper<Team_RiderExportViewModel>.GetExportColumns()
+                                .Select(c => new SelectListItem()
                                 {
-                                    Value = column.Key,
-                                    Text = column.Value,
+                                    Value = c.ColumnName,
+                                    Text = c.Name,
                                     Selected = true
                                 }).ToList();
+            ViewBag.ExportColumns = exportColumns;
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.TeamNameSortParm = String.IsNullOrEmpty(sortOrder) ? "teamName_desc" : string.Empty;
@@ -218,8 +228,11 @@ namespace SHA_Mvc_Lab01.Controllers
                 ? string.Concat("TeamRider_", DateTime.Now.ToString("yyyyMMddHHmmss"), ".xlsx")
                 : string.Concat(fileName, ".xlsx");
 
+            var exportColumns = ExportColumnAttributeHelper<Team_RiderExportViewModel>.GetExportColumns()
+                    .ToDictionary(x => x.ColumnName, y => y.Name);
+
             var removeColumnNames = ExportDataHelper.GetRemoveColumnNames(
-                ExportDataHelper.Team_RiderExportColumns(),
+                exportColumns,
                 selectedColumns);
 
             return new ExportExcelResult
